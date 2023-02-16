@@ -1,0 +1,14 @@
+span.resume-section {
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Work Sans';
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #8986f9 0%, #f0a2fe 100%) 0/200%;
+    border-radius: 6px;
+    padding: 3px 6px;
+    transition: 1s;
+}
+
+span.resume-section:hover {
+    background: linear-gradient(90deg, #8986f9 0%, #f0a2fe 100%) 100%/200%;
+}

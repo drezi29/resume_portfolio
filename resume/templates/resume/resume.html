@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="{% static 'resume/style.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Work+Sans:wght@200;400;600&display=swap" rel="stylesheet">
+        <title>Personal Portfolio</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                </div>
+
+                <div class="col-10">
+                    <div class="text-start">
+                        <span class="resume-section">Work experience</span></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            {% for job in jobs %}
+                            <div class="col-6">
+                                {% if not job.end_date %}
+                                    <h5 class=>{{job.start_date|date:'m/Y'}} - now</h5>
+                                {% else %}
+                                    <h5>{{job.start_date|date:'m/Y'}} - {{job.end_date|date:'m/Y'}}</h5>
+                                {% endif %} 
+                                <h4>{{job.position_name}}</h4>
+                                <h4>{{job.company_name}}</h4>
+                                <ul>
+                                {%for task in tasks%} 
+                                    {% if job.id == task.related_job%}
+                                        <li>{{task.name}}</li>
+                                    {%endif%}
+                                {%endfor%}
+                                </ul>
+
+                                <p>{{job.description|safe}}</p>
+                            </div>
+                            {% endfor %} 
+                        </div>
+                    </div>
+                    
+                    <div class="text-start"><span class="resume-section">Education</span></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            {% for uni in universities %}
+                                <div class="col-6">
+                                    {% if not uni.end_date %}
+                                        <h5>{{uni.start_date|date:'m/Y'}} - now</h5>
+                                    {% else %}
+                                        <h5>{{uni.start_date|date:'m/Y'}} - {{uni.end_date|date:'m/Y'}}</h5>
+                                    {% endif %} 
+                                    <h4>{{uni.name_of_school}}</h4>
+                                    <h4>{{uni.field_of_study}}</h4>
+                                    <p>{{uni.description|safe}}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+
+
+                    <div class="text-start"><span class="resume-section">Skills</span></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            {% for category in skill_categories %}
+                                <div class="col-6">
+                                    <h4>{{category.name}}<h4>
+                                    <ul>
+                                        {%for skill in skills%} 
+                                            {% if category.id == skill.category%}
+                                                <li>{{skill.name}}</li>
+                                                {{skill.details}}
+                                            {%endif%}
+                                        {%endfor%}
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+
+                    <div class="text-start"><span class="resume-section">Certificates</span></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            {% for certificate in certificates %}
+                            <div class="col-6">
+                                <p>{{certificate.name}}<br>{{certificate.achievement_date|date:'m/Y'}}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+
+                    <div class="text-start"><span class="resume-section">Interests</span></div>
+                    <div class="container text-start">
+                        <div class="row">
+                            {% for interest in interests %}
+                            <div class="col-4">
+                                <img src="{{ interest.icon.url }}" width="64" height="64"> 
+                                <p>{{interest.description}}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
